@@ -1,0 +1,5 @@
+i want to make a mern stack web application using mongodb,expressjs,nodejs and react js and it should be ai assisted and it is kind of product mangament it includes user signup,user login,list their products,add thier products,edit their productsand delete their products .So for this first of all give  me a prompt for this to start for the project.
+Based on this prompt give me the file structure and code but the project should be with attractive ui and should include user sign up if the user does not have account and the login with the creditanls if the user alreay has account a,the user shoukd be able to add the product,delete their product,edit their product. 
+the sign up form must give error if any of the field is not filled,the password is not 8 characters long and if it does not contain special character,a digit,a uppercase .
+Give me steps for the mongodb connection with mongo db atlas.
+step by step guid to deploy it to vercel properly without errors.
