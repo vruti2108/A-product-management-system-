@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
-// Create axios instance with baseURL
+// Axios instance with baseURL = /api
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -10,7 +10,7 @@ const api = axios.create({
   }
 });
 
-// Add token to every request
+// Add token to requests
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -22,7 +22,7 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// Handle 401 errors
+// Handle 401
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -35,13 +35,13 @@ api.interceptors.response.use(
   }
 );
 
-// Auth APIs — USE api instance (no extra /api)
+// AUTH — NO /api PREFIX
 export const authAPI = {
   signup: (userData) => api.post('/auth/signup', userData),
   login: (credentials) => api.post('/auth/login', credentials)
 };
 
-// Product APIs — USE api instance
+// PRODUCTS — NO /api PREFIX
 export const productAPI = {
   getProducts: () => api.get('/products'),
   addProduct: (data) => api.post('/products', data),
