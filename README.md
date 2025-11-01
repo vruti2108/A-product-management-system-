@@ -76,7 +76,7 @@ npm start
 
 ## Author
 
-Your Name
+Vruti Patel
 
 ## License
 
