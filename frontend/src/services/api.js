@@ -15,7 +15,7 @@ api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
+      config.headers.Authorization = `Bearer ${token}`; 
     }
     return config;
   },
@@ -44,12 +44,10 @@ export const authAPI = {
 };
 
 // Product API calls
-export const productAPI = {
-  getAll: () => api.get('/api/products'),
-  getOne: (id) => api.get(`/api/products/${id}`),
-  create: (productData) => api.post('/api/products', productData),
-  update: (id, productData) => api.put(`/api/products/${id}`, productData),
-  delete: (id) => api.delete(`/api/products/${id}`)
-};
-
+export const signup = (data) => axios.post(`${API_URL}/auth/signup`, data);
+export const login = (data) => axios.post(`${API_URL}/auth/login`, data);
+export const getProducts = () => axios.get(`${API_URL}/products`);
+export const addProduct = (data) => axios.post(`${API_URL}/products`, data);
+export const updateProduct = (id, data) => axios.put(`${API_URL}/products/${id}`, data);
+export const deleteProduct = (id) => axios.delete(`${API_URL}/products/${id}`);
 export default api; 
