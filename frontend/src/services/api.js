@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5001';
 
-// Create axios instance
+// Create axios instance with baseURL
 const api = axios.create({
   baseURL: API_URL,
   headers: {
@@ -10,7 +10,7 @@ const api = axios.create({
   }
 });
 
-// Request interceptor to add token
+// Add token to every request
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('token');
@@ -19,12 +19,10 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
-// Response interceptor for error handling
+// Handle 401 errors
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -37,20 +35,18 @@ api.interceptors.response.use(
   }
 );
 
-// Auth API calls
+// Auth APIs — USE api instance (no extra /api)
 export const authAPI = {
-  signup: (userData) => api.post('/api/auth/signup', userData),
-  login: (credentials) => api.post('/api/auth/login', credentials)
+  signup: (userData) => api.post('/auth/signup', userData),
+  login: (credentials) => api.post('/auth/login', credentials)
 };
 
-// Product API calls
+// Product APIs — USE api instance
 export const productAPI = {
-  export const signup = (data) => axios.post(`${API_URL}/auth/signup`, data);
-export const login = (data) => axios.post(`${API_URL}/auth/login`, data);
-export const getProducts = () => axios.get(`${API_URL}/products`);
-export const addProduct = (data) => axios.post(`${API_URL}/products`, data);
-export const updateProduct = (id, data) => axios.put(`${API_URL}/products/${id}`, data);
-export const deleteProduct = (id) => axios.delete(`${API_URL}/products/${id}`);
+  getProducts: () => api.get('/products'),
+  addProduct: (data) => api.post('/products', data),
+  updateProduct: (id, data) => api.put(`/products/${id}`, data),
+  deleteProduct: (id) => api.delete(`/products/${id}`)
 };
 
-export default api; 
+export default api;
