@@ -68,5 +68,5 @@ export const productAPI = {
 };
 
 export default api;
-```
+
 
